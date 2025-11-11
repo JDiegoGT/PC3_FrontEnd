@@ -27,7 +27,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
       // Guardar sesión simple
       sessionStorage.setItem('loggedUser', username);
       sessionStorage.setItem('role', 'administrador');
-      window.location.href = 'admin.html';
+      window.location.href = 'admin-panel.html';
     } else {
       errorMessage.textContent = 'Correo o contraseña incorrectos para administrador.';
     }
@@ -47,7 +47,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
 
 // VERIFICAR SESIÓN EN PANEL ADMINISTRADOR Y CLIENTE
 
-if (window.location.pathname.endsWith('admin.html')) {
+if (window.location.pathname.endsWith('admin-panel.html')) {
   if (sessionStorage.getItem('role') !== 'administrador') {
     alert('Acceso no autorizado.');
     window.location.href = 'login.html';
