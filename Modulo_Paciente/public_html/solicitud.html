@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nueva Consulta</title>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/patient.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+  <header>
+    <h1>Registrar nueva consulta</h1>
+    <nav>
+      <a href="cliente.html">Volver al panel</a>
+      <a href="historial.html">Ver historial</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="form-section">
+      <form id="consultaForm" action="#" method="POST">
+        <label for="symptoms">Síntomas:</label>
+        <textarea id="symptoms" name="symptoms" placeholder="Describa sus síntomas: " required></textarea>
+
+        <label for="details">Detalles adicionales:</label>
+        <textarea id="details" name="details" placeholder="Agrega información adicional(Opcional): "></textarea>
+
+        <button type="submit" class="btn btn-primary">Enviar consulta</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="js/patient.js"></script>
+</body>
+</html>

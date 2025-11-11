@@ -1,0 +1,195 @@
+/* === ESTILOS GENERALES DEL MÓDULO PACIENTE === */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* === BARRA SUPERIOR DE NAVEGACIÓN === */
+header {
+  background-color: #0077cc;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 1.4em;
+  margin: 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* === SECCIONES PRINCIPALES === */
+main {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* === FORMULARIO DE SOLICITUD === */
+.form-section {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: 600;
+}
+
+textarea {
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 1em;
+  resize: vertical;
+}
+
+button {
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+/* === MENSAJES DE CONFIRMACIÓN === */
+.success-msg {
+  background-color: #e9f9ec;
+  color: #2e7d32;
+  border-left: 5px solid #2e7d32;
+  padding: 10px 15px;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+/* === TABLA DE HISTORIAL === */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #0077cc;
+  color: white;
+  font-weight: 600;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* === PIE DE PÁGINA (opcional) === */
+footer {
+  text-align: center;
+  padding: 15px;
+  color: #555;
+  font-size: 0.9em;
+}
+
+/* === EFECTOS DE TRANSICIÓN SUAVE === */
+section, table, form {
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Botones con efecto “clic” */
+button:active {
+  transform: scale(0.97);
+}
+
+/* Links con resalte visual */
+nav a {
+  position: relative;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* === ANIMACIÓN DE CARGA === */
+#loader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(255,255,255,0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.spinner {
+  border: 5px solid #eee;
+  border-top: 5px solid #0077cc;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
