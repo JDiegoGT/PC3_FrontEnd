@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultas Pendientes</title>
+  <link rel="stylesheet" href="css/doctor.css">
+</head>
+<body>
+  <header>
+    <h1>Consultas Pendientes</h1>
+    <nav>
+      <a href="doctor-dashboard.html">Inicio</a>
+      <a href="admin-panel.html">Panel de Administración</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Listado de Consultas</h2>
+    <input type="text" id="search" placeholder="Buscar por paciente...">
+
+    <table>
+      <thead>
+        <tr>
+          <th>Paciente</th>
+          <th>Motivo</th>
+          <th>Fecha</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody id="consultationTable">
+        <!-- Las filas se agregarán con JavaScript -->
+      </tbody>
+    </table>
+  </main>
+
+  <!-- Formulario para responder -->
+  <div id="responseModal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Responder Consulta</h3>
+      <textarea id="responseText" placeholder="Escriba su respuesta médica..."></textarea>
+      <button id="sendResponse">Enviar Respuesta</button>
+      <button id="closeModal">Cerrar</button>
+    </div>
+  </div>
+
+  <script src="js/doctor.js"></script>
+</body>
+</html>
