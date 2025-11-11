@@ -1,0 +1,328 @@
+/* login.css — Estilo renovado para Clínica Virtual de Consultas Simuladas */
+
+:root {
+  --primary-color: #0077b6;     /* Azul institucional médico */
+  --secondary-color: #00b4d8;   /* Turquesa suave */
+  --accent-color: #90e0ef;      /* Azul claro */
+  --dark-blue: #023e8a;         /* Azul oscuro para contraste */
+  --bg-light: #f1faff;          /* Fondo claro */
+  --text-color: #023047;        /* Texto base */
+  --radius: 14px;
+  --shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  --transition: 0.3s ease;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #e6f7ff, #ffffff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: var(--text-color);
+}
+
+/* --- Contenedor principal del login --- */
+.login-container {
+  background: white;
+  padding: 40px 45px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: 360px;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+  position: relative;
+}
+
+.login-container::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+  background: url('https://cdn-icons-png.flaticon.com/512/2966/2966486.png') no-repeat center/contain;
+  opacity: 0.9;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Título --- */
+.login-container h2 {
+  margin-top: 70px;
+  margin-bottom: 25px;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 1.8em;
+  letter-spacing: 0.5px;
+}
+
+/* --- Etiquetas --- */
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--dark-blue);
+  text-align: left;
+  font-size: 0.95em;
+}
+
+/* --- Campos de texto --- */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 11px 14px;
+  margin-bottom: 18px;
+  border: 1.5px solid #cce3f0;
+  border-radius: var(--radius);
+  font-size: 1em;
+  background: #f9fcff;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+input:focus,
+select:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 8px rgba(0, 180, 216, 0.3);
+  outline: none;
+  background: #fff;
+}
+
+/* --- Botón de envío --- */
+button {
+  width: 100%;
+  background: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  font-size: 1.1em;
+  padding: 12px;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background var(--transition), transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 4px 10px rgba(0, 119, 182, 0.25);
+}
+
+button:hover {
+  background: var(--secondary-color);
+  transform: scale(1.03);
+  box-shadow: 0 6px 15px rgba(0, 180, 216, 0.3);
+}
+
+/* --- Mensaje de error --- */
+.error {
+  color: #d90429;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.95em;
+}
+
+/* --- Enlace inferior --- */
+.footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: var(--dark-blue);
+}
+
+.footer a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color var(--transition);
+}
+
+.footer a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+/* --- Adaptabilidad --- */
+@media (max-width: 400px) {
+  .login-container {
+    width: 90%;
+    padding: 30px 25px;
+  }
+
+  .login-container h2 {
+    font-size: 1.5em;
+  }
+}
+/* login.css — Estilo renovado para Clínica Virtual de Consultas Simuladas */
+
+:root {
+  --primary-color: #0077b6;     /* Azul institucional médico */
+  --secondary-color: #00b4d8;   /* Turquesa suave */
+  --accent-color: #90e0ef;      /* Azul claro */
+  --dark-blue: #023e8a;         /* Azul oscuro para contraste */
+  --bg-light: #f1faff;          /* Fondo claro */
+  --text-color: #023047;        /* Texto base */
+  --radius: 14px;
+  --shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  --transition: 0.3s ease;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #e6f7ff, #ffffff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: var(--text-color);
+}
+
+/* --- Contenedor principal del login --- */
+.login-container {
+  background: white;
+  padding: 40px 45px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: 360px;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+  position: relative;
+}
+
+.login-container::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+  background: url('https://cdn-icons-png.flaticon.com/512/2966/2966486.png') no-repeat center/contain;
+  opacity: 0.9;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Título --- */
+.login-container h2 {
+  margin-top: 70px;
+  margin-bottom: 25px;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 1.8em;
+  letter-spacing: 0.5px;
+}
+
+/* --- Etiquetas --- */
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--dark-blue);
+  text-align: left;
+  font-size: 0.95em;
+}
+
+/* --- Campos de texto --- */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 11px 14px;
+  margin-bottom: 18px;
+  border: 1.5px solid #cce3f0;
+  border-radius: var(--radius);
+  font-size: 1em;
+  background: #f9fcff;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+input:focus,
+select:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 8px rgba(0, 180, 216, 0.3);
+  outline: none;
+  background: #fff;
+}
+
+/* --- Botón de envío --- */
+button {
+  width: 100%;
+  background: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  font-size: 1.1em;
+  padding: 12px;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background var(--transition), transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 4px 10px rgba(0, 119, 182, 0.25);
+}
+
+button:hover {
+  background: var(--secondary-color);
+  transform: scale(1.03);
+  box-shadow: 0 6px 15px rgba(0, 180, 216, 0.3);
+}
+
+/* --- Mensaje de error --- */
+.error {
+  color: #d90429;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.95em;
+}
+
+/* --- Enlace inferior --- */
+.footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: var(--dark-blue);
+}
+
+.footer a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color var(--transition);
+}
+
+.footer a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+/* --- Adaptabilidad --- */
+@media (max-width: 400px) {
+  .login-container {
+    width: 90%;
+    padding: 30px 25px;
+  }
+
+  .login-container h2 {
+    font-size: 1.5em;
+  }
+}

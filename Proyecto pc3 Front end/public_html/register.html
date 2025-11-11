@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Registro - Sistema de Reservas UNI</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <div class="login-container">
+    <h2>Registro-Clínica Santa Rosa</h2>
+    <form id="registerForm">
+      <label for="regUsername">Correo electrónico</label>
+      <input type="email" id="regUsername" placeholder="Ingresa tu correo" required />
+      
+      <label for="regName">Nombre completo</label>
+      <input type="text" id="regName" placeholder="Tu nombre" required />
+
+      <label for="regPassword">Contraseña</label>
+      <input type="password" id="regPassword" placeholder="Contraseña" required />
+
+      <button type="submit">Registrar</button>
+      <div id="registerMessage" class="error"></div>
+    </form>
+    <div class="footer">
+      ¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a>
+    </div>
+  </div>
+
+<script>
+  document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = document.getElementById('regUsername').value.trim().toLowerCase();
+    const name = document.getElementById('regName').value.trim();
+    const password = document.getElementById('regPassword').value;
+
+    const registerMessage = document.getElementById('registerMessage');
+
+    if (!email || !name || !password) {
+      registerMessage.textContent = 'Por favor, completa todos los campos.';
+      return;
+    }
+
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+
+    if (users.some(u => u.email === email)) {
+      registerMessage.textContent = 'Este correo ya está registrado.';
+      return;
+    }
+
+    users.push({ email, name, password, role: 'cliente', registered: new Date().toISOString().slice(0,10) });
+    localStorage.setItem('users', JSON.stringify(users));
+
+    registerMessage.style.color = 'green';
+    registerMessage.textContent = 'Registro exitoso. Puedes iniciar sesión.';
+    this.reset();
+  });
+</script>
+</body>
+</html>

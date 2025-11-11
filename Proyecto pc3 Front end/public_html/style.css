@@ -1,0 +1,161 @@
+/* style.css — Estilos comunes para Clínica Virtual de Consultas Simuladas */
+/* Cohesión visual con admin.css, index.css y login.css */
+
+:root {
+  --primary-color: #0077b6;     /* Azul institucional */
+  --secondary-color: #00b4d8;   /* Turquesa suave */
+  --accent-color: #90e0ef;      /* Azul claro */
+  --dark-blue: #023e8a;         /* Contraste */
+  --danger-color: #d90429;      /* Rojo alerta */
+  --warning-color: #ffb703;     /* Amarillo cálido */
+  --bg-light: #f5faff;          /* Fondo claro */
+  --text-color: #023047;        /* Texto principal */
+  --shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  --radius: 10px;
+  --transition: 0.3s ease;
+}
+
+/* ---------------- TABLAS ---------------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: white;
+}
+
+table thead {
+  background: var(--primary-color);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+table th, 
+table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #e2ecf3;
+  text-align: left;
+  font-size: 0.95em;
+}
+
+table tbody tr:nth-child(even) {
+  background: #f8fcff;
+}
+
+table tbody tr:hover {
+  background: #e9f5fb;
+  transition: background var(--transition);
+}
+
+/* ---------------- BOTONES COMUNES ---------------- */
+.btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95em;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* Botón editar */
+.btn-edit {
+  background: var(--warning-color);
+  color: #222;
+}
+
+.btn-edit:hover {
+  background: #ffca3a;
+  box-shadow: 0 5px 12px rgba(255, 183, 3, 0.35);
+}
+
+/* Botón eliminar */
+.btn-delete {
+  background: var(--danger-color);
+  color: white;
+}
+
+.btn-delete:hover {
+  background: #b60320;
+  box-shadow: 0 5px 12px rgba(217, 4, 41, 0.35);
+}
+
+/* Botón general (azul) */
+.btn-primary {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--secondary-color);
+  box-shadow: 0 5px 12px rgba(0, 180, 216, 0.3);
+}
+
+/* ---------------- LOGOUT ---------------- */
+.logout {
+  display: inline-block;
+  margin: 25px auto 0 auto;
+  background: var(--danger-color);
+  color: white;
+  padding: 12px 25px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(217, 4, 41, 0.25);
+  transition: background var(--transition), transform var(--transition);
+}
+
+.logout:hover {
+  background: #a1021e;
+  transform: scale(1.05);
+}
+
+/* ---------------- MENSAJES DE ALERTA ---------------- */
+.alert {
+  padding: 12px 18px;
+  border-radius: var(--radius);
+  margin: 15px 0;
+  font-weight: 500;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.alert-success {
+  background: #d8f3dc;
+  color: #004b23;
+  border-left: 5px solid #2d6a4f;
+}
+
+.alert-warning {
+  background: #fff3cd;
+  color: #7a5a00;
+  border-left: 5px solid #ffb703;
+}
+
+.alert-error {
+  background: #ffe5e5;
+  color: #9a031e;
+  border-left: 5px solid #d90429;
+}
+
+/* ---------------- PEQUEÑAS UTILIDADES ---------------- */
+.center {
+  text-align: center;
+}
+
+.shadow {
+  box-shadow: var(--shadow);
+}
+
+.hidden {
+  display: none;
+}

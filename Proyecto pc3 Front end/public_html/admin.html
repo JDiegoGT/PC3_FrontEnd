@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Panel Administrador - Eventos UNI</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="admin.css" />
+<style>
+  /* Estilos generales para panel */
+  body {
+    background: #f4f7f8;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 1000px;
+    margin: 30px auto;
+    background: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+  h1 {
+    color: #005f31;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  /* Menu pestañas */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  .tab-btn {
+    background: #e2e8e4;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #004622;
+    transition: background 0.3s, color 0.3s;
+  }
+  .tab-btn.active, .tab-btn:hover {
+    background: #005f31;
+    color: white;
+  }
+
+  /* Contenedores de pestañas */
+  .tab-content {
+    display: none;
+  }
+  .tab-content.active {
+    display: block;
+  }
+
+  /* Formulario de eventos */
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  form input, form textarea {
+    flex: 1 1 200px;
+    padding: 8px 10px;
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+  }
+  form textarea {
+    resize: vertical;
+  }
+  form button {
+    flex: 0 0 120px;
+    background: #005f31;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  form button:hover {
+    background: #004622;
+  }
+
+  /* Tablas */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  table thead {
+    background: #0b7a5b;
+    color: white;
+  }
+  table th, table td {
+    padding: 12px 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  table tbody tr:hover {
+    background: #f0fdf8;
+  }
+  .btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .btn-edit {
+    background: #ffb703;
+    color: black;
+  }
+  .btn-delete {
+    background: #d90429;
+    color: white;
+  }
+
+  /* Logout */
+  .logout {
+    display: block;
+    width: max-content;
+    margin: 20px auto 0 auto;
+    background: #d90429;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    text-align: center;
+  }
+  .logout:hover {
+    background: #a1021e;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Panel de Administrador</h1>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="events">Eventos</button>
+    <button class="tab-btn" data-tab="users">Usuarios</button>
+    <button class="tab-btn" data-tab="admins">Administradores</button>
+  </div>
+
+  <!-- Eventos -->
+  <div id="events" class="tab-content active">
+    <form id="eventForm">
+      <input type="text" id="eventName" placeholder="Nombre del evento" required />
+      <input type="date" id="eventDate" required />
+      <input type="text" id="eventPlace" placeholder="Lugar" required />
+      <input type="url" id="eventImage" placeholder="URL imagen (opcional)" />
+      <textarea id="eventDescription" placeholder="Descripción" rows="2"></textarea>
+      <label>
+        Entradas agotadas: <input type="checkbox" id="eventSoldOut" />
+      </label>
+      <button type="submit">Agregar Evento</button>
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Fecha</th>
+          <th>Lugar</th>
+          <th>Descripción</th>
+          <th>Imagen</th>
+          <th>Disponibilidad</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="eventsTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Usuarios -->
+  <div id="users" class="tab-content">
+    <h2>Usuarios registrados: <span id="userCount">0</span></h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Correo</th>
+          <th>Nombre</th>
+          <th>Registrado</th>
+        </tr>
+      </thead>
+      <tbody id="usersTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Administradores -->
+  <div id="admins" class="tab-content">
+    <h2>Administradores</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Correo</th>
+          <th>Nombre</th>
+        </tr>
+      </thead>
+      <tbody id="adminsTableBody"></tbody>
+    </table>
+  </div>
+
+  <a href="login.html" class="logout">Cerrar sesión</a>
+</div>
+
+<script>
+  // Manejo de pestañas
+  const tabs = document.querySelectorAll('.tab-btn');
+  const contents = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      contents.forEach(c => c.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Datos simulados
+  let events = JSON.parse(localStorage.getItem('events')) || [];
+  let users = [
+    { email: 'usuario1@uni.pe', name: 'Juan Pérez', registered: '2024-05-01' },
+    { email: 'usuario2@uni.pe', name: 'María López', registered: '2024-05-12' },
+    { email: 'usuario3@uni.pe', name: 'Carlos Díaz', registered: '2024-05-20' }
+  ];
+  let admins = [
+    { email: 'axel.arangure.z@uni.pe', name: 'Axel Arangure' },
+    { email: 'jeff.pahuacho.r@uni.pe', name: 'Jeff Pahuacho' },
+    { email: 'terrence.alcantara.t@uni.pe', name: 'Terrence Alacantara' }
+  ];
+
+  // Render Eventos
+  const eventsTbody = document.getElementById('eventsTableBody');
+  const form = document.getElementById('eventForm');
+  function renderEvents() {
+    eventsTbody.innerHTML = '';
+    events.forEach((event, index) => {
+      eventsTbody.innerHTML += `
+        <tr>
+          <td>${event.name}</td>
+          <td>${event.date}</td>
+          <td>${event.place}</td>
+          <td>${event.description || '-'}</td>
+          <td>${event.image ? `<img src="${event.image}" alt="${event.name}" style="width:80px; height:auto; border-radius:4px;">` : '-'}</td>
+          <td>${event.soldOut ? '<strong style="color:red;">Agotado</strong>' : 'Disponible'}</td>
+          <td>
+            <button class="btn btn-edit" onclick="editEvent(${index})">Editar</button>
+            <button class="btn btn-delete" onclick="deleteEvent(${index})">Eliminar</button>
+          </td>
+        </tr>
+      `;
+    });
+  }
+  function saveEvents() {
+    localStorage.setItem('events', JSON.stringify(events));
+  }
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('eventName').value.trim();
+    const date = document.getElementById('eventDate').value;
+    const place = document.getElementById('eventPlace').value.trim();
+    const image = document.getElementById('eventImage').value.trim();
+    const description = document.getElementById('eventDescription').value.trim();
+    const soldOut = document.getElementById('eventSoldOut').checked;
+    if (!name || !date || !place) {
+      alert('Por favor, completa todos los campos requeridos.');
+      return;
+    }
+    events.push({ name, date, place, image, description, soldOut });
+    saveEvents();
+    renderEvents();
+    form.reset();
+  });
+  window.deleteEvent = function(index) {
+    if (confirm('¿Estás seguro de eliminar este evento?')) {
+      events.splice(index, 1);
+      saveEvents();
+      renderEvents();
+    }
+  };
+  window.editEvent = function(index) {
+    const event = events[index];
+    document.getElementById('eventName').value = event.name;
+    document.getElementById('eventDate').value = event.date;
+    document.getElementById('eventPlace').value = event.place;
+    document.getElementById('eventImage').value = event.image;
+    document.getElementById('eventDescription').value = event.description;
+    document.getElementById('eventSoldOut').checked = event.soldOut;
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.textContent = 'Actualizar Evento';
+
+    form.removeEventListener('submit', addHandler);
+
+    function updateHandler(e) {
+      e.preventDefault();
+      events[index] = {
+        name: document.getElementById('eventName').value.trim(),
+        date: document.getElementById('eventDate').value,
+        place: document.getElementById('eventPlace').value.trim(),
+        image: document.getElementById('eventImage').value.trim(),
+        description: document.getElementById('eventDescription').value.trim(),
+        soldOut: document.getElementById('eventSoldOut').checked
+      };
+      saveEvents();
+      renderEvents();
+      form.reset();
+      submitBtn.textContent = 'Agregar Evento';
+      form.removeEventListener('submit', updateHandler);
+      form.addEventListener('submit', addHandler);
+    }
+    form.addEventListener('submit', updateHandler);
+  };
+  function addHandler(e) {
+    e.preventDefault();
+  }
+  form.addEventListener('submit', addHandler);
+
+  // Render Usuarios
+  const usersTbody = document.getElementById('usersTableBody');
+  const userCountSpan = document.getElementById('userCount');
+  function renderUsers() {
+    usersTbody.innerHTML = '';
+    users.forEach(user => {
+      usersTbody.innerHTML += `
+        <tr>
+          <td>${user.email}</td>
+          <td>${user.name}</td>
+          <td>${user.registered}</td>
+        </tr>
+      `;
+    });
+    userCountSpan.textContent = users.length;
+  }
+
+  // Render Admins
+  const adminsTbody = document.getElementById('adminsTableBody');
+  function renderAdmins() {
+    adminsTbody.innerHTML = '';
+    admins.forEach(admin => {
+      adminsTbody.innerHTML += `
+        <tr>
+          <td>${admin.email}</td>
+          <td>${admin.name}</td>
+        </tr>
+      `;
+    });
+  }
+
+  // Inicialización
+  renderEvents();
+  renderUsers();
+  renderAdmins();
+</script>
+
+</body>
+</html>
